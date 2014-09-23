@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class Map {
 
     private String name;
+    private Float autonomy;
     private Float gasCost;
     private Float totalCost;
     private List<Route> routes;
@@ -20,6 +21,14 @@ public class Map {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Float getAutonomy() {
+        return autonomy;
+    }
+
+    public void setAutonomy(Float autonomy) {
+        this.autonomy = autonomy;
     }
 
     public Float getGasCost() {

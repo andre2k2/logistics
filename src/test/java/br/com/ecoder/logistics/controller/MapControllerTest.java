@@ -77,6 +77,15 @@ public class MapControllerTest {
         Assert.assertNotNull(response.getBody());
         Assert.assertNotNull(response.getBody().getName());
         Assert.assertEquals(map, response.getBody());
+
+        Assert.assertEquals("test", response.getBody().getName());
+        Assert.assertEquals(new Float(10.0f), response.getBody().getAutonomy());
+        Assert.assertEquals(new Float(2.5f), response.getBody().getGasCost());
+        Assert.assertEquals(new Float(6.25f), response.getBody().getTotalCost());
+
+        Assert.assertEquals(new Integer(1), response.getBody().getRoutes().get(0).getDistance());
+        Assert.assertEquals("A", response.getBody().getRoutes().get(0).getOrigin().getName());
+        Assert.assertEquals("B", response.getBody().getRoutes().get(0).getDestiny().getName());
     }
 
     @Test
@@ -89,5 +98,14 @@ public class MapControllerTest {
         Assert.assertNotNull(response.getBody());
         Assert.assertNotNull(response.getBody().getName());
         Assert.assertEquals(map, response.getBody());
+
+        Assert.assertEquals("test", response.getBody().getName());
+        Assert.assertEquals(new Float(10.0f), response.getBody().getAutonomy());
+        Assert.assertEquals(new Float(2.5f), response.getBody().getGasCost());
+        Assert.assertEquals(new Float(6.25f), response.getBody().getTotalCost());
+
+        Assert.assertEquals(new Integer(1), response.getBody().getRoutes().get(0).getDistance());
+        Assert.assertEquals("A", response.getBody().getRoutes().get(0).getOrigin().getName());
+        Assert.assertEquals("B", response.getBody().getRoutes().get(0).getDestiny().getName());
     }
 }

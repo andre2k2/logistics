@@ -1,6 +1,5 @@
 package br.com.ecoder.logistics.controller;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.http.HttpHeaders;
@@ -30,13 +29,17 @@ public class BaseRestController extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, buildErrorResource(ex.getAllErrors()), headers, status, request);
     }
 
-    protected List<String> buildErrorResource(List<ObjectError> errorList) {
+    protected Errors buildErrorResource(List<ObjectError> errorList) {
 
-        LinkedList<String> errors = new LinkedList<String>();
+        Errors errors = new Errors();
 
         for (ObjectError objError : errorList) {
+
             String message = objError.getDefaultMessage();
-            errors.add(message);
+
+            if (message != null && !message.trim().isEmpty()) {
+                errors.getErrors().add(new Error(message));
+            }
         }
 
         return errors;

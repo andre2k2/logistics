@@ -4,32 +4,32 @@
 		{
 			"origin": { "name": "A" },
 			"destiny": { "name": "B" },
-			"distance": 10,
+			"distance": 10
 		},
 		{
 			"origin": { "name": "B" },
 			"destiny": { "name": "D" },
-			"distance": 15,
+			"distance": 15
 		},
 		{
 			"origin": { "name": "A" },
 			"destiny": { "name": "C" },
-			"distance": 20,
+			"distance": 20
 		},
 		{
 			"origin": { "name": "C" },
 			"destiny": { "name": "D" },
-			"distance": 30,
+			"distance": 30
 		},
 		{
 			"origin": { "name": "B" },
 			"destiny": { "name": "E" },
-			"distance": 50,
+			"distance": 50
 		},
 		{
 			"origin": { "name": "D" },
 			"destiny": { "name": "E" },
-			"distance": 30,
-		},
+			"distance": 30
+		}
 	]
 }

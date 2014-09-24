@@ -1,5 +1,7 @@
 package br.com.ecoder.logistics.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +25,9 @@ public class MapController {
 
     /**
      * Endpoint utilizado para persistir uma malha logistica.
-     * 
+     *
      * Ex. de Chamada: POST http://127.0.0.1/logistics/map
-     * 
+     *
      * Body Content:
      * {
      *     "name": "teste",
@@ -37,12 +39,12 @@ public class MapController {
      *         }
      *     ]
      * }
-     * 
-     * @return Código 201 (Created) se a malha logistica foi criada com sucesso.
-     *         Código 500 (Internal server error) se houve algum problema na criação.
+     *
+     * @return Cï¿½digo 201 (Created) se a malha logistica foi criada com sucesso.
+     *         Cï¿½digo 500 (Internal server error) se houve algum problema na criaï¿½ï¿½o.
      */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> save(@RequestBody Map map) {
+    public ResponseEntity<?> save(@RequestBody @Valid Map map) {
 
         application.persist(map);
 
@@ -51,11 +53,11 @@ public class MapController {
 
     /**
      * Endpoint utilizado para visualizar a malha logistica.
-     * 
+     *
      * EX. de Chamada: GET http://127.0.0.1/logistics/map/meumapa
-     * 
-     * @return Código 200 (OK) e o conteúdo da malha em formato JSON.
-     *         Código 500 (Internal server error) se houverem erros na execução.
+     *
+     * @return Cï¿½digo 200 (OK) e o conteï¿½do da malha em formato JSON.
+     *         Cï¿½digo 500 (Internal server error) se houverem erros na execuï¿½ï¿½o.
      */
     @RequestMapping(value = "/{map}", method = RequestMethod.GET)
     public ResponseEntity<Map> get(@PathVariable("map") String name) {
@@ -67,9 +69,9 @@ public class MapController {
 
     /**
      * Endpoit utilizado para calcular a menor rota e menor custo entre dois pontos de uma malha logistica.
-     * 
+     *
      * Ex. de Chamada: GET http://127.0.0.1/logistics/map/route?map=teste&origin=A&destiny=D&autonomy=10.0&cost=2.5
-     * 
+     *
      * Ex. de Retorno:
      * {
      *     "name": "teste",
@@ -84,22 +86,22 @@ public class MapController {
      *         }
      *     ]
      * }
-     * 
-     * @return Código 200 (OK) e o conteúdo da malha em formato JSON.
-     *         Código 500 (Internal server error) se houverem erros na execução.
-     *         
+     *
+     * @return Cï¿½digo 200 (OK) e o conteï¿½do da malha em formato JSON.
+     *         Cï¿½digo 500 (Internal server error) se houverem erros na execuï¿½ï¿½o.
+     *
      *         name: nome da malha logistica.
-     *         autonomy: autonomia do caminhão (Km/Litro).
+     *         autonomy: autonomia do caminhï¿½o (Km/Litro).
      *         gasCost: custo do combustivel.
-     *         totalCost: custo total de combustivel que será gasto na rota definida.
+     *         totalCost: custo total de combustivel que serï¿½ gasto na rota definida.
      *         route: menor rota na malha logistica entre os dois pontos.
      */
     @RequestMapping(value = "/route", method = RequestMethod.GET)
     public ResponseEntity<Map> route(
-            @RequestParam(value = "map", required = true) String name, 
-            @RequestParam(value = "origin", required = true) String origin, 
-            @RequestParam(value = "destiny", required = true) String destiny, 
-            @RequestParam(value = "autonomy", required = true) Float autonomy, 
+            @RequestParam(value = "map", required = true) String name,
+            @RequestParam(value = "origin", required = true) String origin,
+            @RequestParam(value = "destiny", required = true) String destiny,
+            @RequestParam(value = "autonomy", required = true) Float autonomy,
             @RequestParam(value = "cost", required = true) Float cost) {
 
         Map map = application.findRoute(name, origin, destiny, autonomy, cost);

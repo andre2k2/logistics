@@ -2,11 +2,14 @@ package br.com.ecoder.logistics.model;
 
 import java.util.List;
 
+import br.com.ecoder.logistics.validation.MapConstraint;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@MapConstraint
 public class Map {
 
     private String name;

@@ -15,6 +15,8 @@
 		<spring.version>4.0.3.RELEASE</spring.version>
 		<jackson.version>2.4.1</jackson.version>
 		<cglib.version>2.2.2</cglib.version>
+        <hibernate.version>4.0.2.GA</hibernate.version>
+        <javax.validation.version>1.0.0.GA</javax.validation.version>
 	</properties>
 
 	<dependencies>
@@ -82,6 +84,19 @@
 			<scope>runtime</scope>
 		</dependency>
 
+        <!-- Hibernate validation -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <!-- Slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.7</version>
+        </dependency>
 
 		<!-- Servlet Spec -->
 		<dependency>
@@ -96,6 +111,11 @@
 			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${javax.validation.version}</version>
+        </dependency>
 	</dependencies>
 
 	<repositories>

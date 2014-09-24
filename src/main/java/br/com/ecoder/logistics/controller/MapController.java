@@ -40,8 +40,8 @@ public class MapController {
      *     ]
      * }
      *
-     * @return C�digo 201 (Created) se a malha logistica foi criada com sucesso.
-     *         C�digo 500 (Internal server error) se houve algum problema na cria��o.
+     * @return Codigo 201 (Created) se a malha logistica foi criada com sucesso.
+     *         Codigo 500 (Internal server error) se houve algum problema na criacao.
      */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> save(@RequestBody @Valid Map map) {
@@ -56,8 +56,8 @@ public class MapController {
      *
      * EX. de Chamada: GET http://127.0.0.1/logistics/map/meumapa
      *
-     * @return C�digo 200 (OK) e o conte�do da malha em formato JSON.
-     *         C�digo 500 (Internal server error) se houverem erros na execu��o.
+     * @return Codigo 200 (OK) e o conteudo da malha em formato JSON.
+     *         Codigo 500 (Internal server error) se houverem erros na execucao.
      */
     @RequestMapping(value = "/{map}", method = RequestMethod.GET)
     public ResponseEntity<Map> get(@PathVariable("map") String name) {
@@ -87,13 +87,13 @@ public class MapController {
      *     ]
      * }
      *
-     * @return C�digo 200 (OK) e o conte�do da malha em formato JSON.
-     *         C�digo 500 (Internal server error) se houverem erros na execu��o.
+     * @return Codigo 200 (OK) e o conteudo da malha em formato JSON.
+     *         Codigo 500 (Internal server error) se houverem erros na execucao.
      *
      *         name: nome da malha logistica.
-     *         autonomy: autonomia do caminh�o (Km/Litro).
+     *         autonomy: autonomia do caminhao (Km/Litro).
      *         gasCost: custo do combustivel.
-     *         totalCost: custo total de combustivel que ser� gasto na rota definida.
+     *         totalCost: custo total de combustivel que sera gasto na rota definida.
      *         route: menor rota na malha logistica entre os dois pontos.
      */
     @RequestMapping(value = "/route", method = RequestMethod.GET)

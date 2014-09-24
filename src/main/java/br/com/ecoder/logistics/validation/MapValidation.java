@@ -25,22 +25,23 @@ public class MapValidation implements ConstraintValidator<MapConstraint, Map> {
         if (map == null) {
             context.buildConstraintViolationWithTemplate("O mapa esta nulo. O corpo da requisicao deve ser preenchido.").addConstraintViolation();
             valid &= false;
-        }
+        } else {
 
-        if (map.getName() == null || map.getName().trim().isEmpty()) {
-            context.buildConstraintViolationWithTemplate("O nome do mapa esta nulo.").addConstraintViolation();
-            valid &= false;
-        }
+            if (map.getName() == null || map.getName().trim().isEmpty()) {
+                context.buildConstraintViolationWithTemplate("O nome do mapa esta nulo.").addConstraintViolation();
+                valid &= false;
+            }
 
-        if (map.getRoutes() == null || map.getRoutes().isEmpty()) {
-            context.buildConstraintViolationWithTemplate("Nao ha nenhuma rota no mapa.").addConstraintViolation();
-            valid &= false;
-        }
+            if (map.getRoutes() == null || map.getRoutes().isEmpty()) {
+                context.buildConstraintViolationWithTemplate("Nao ha nenhuma rota no mapa.").addConstraintViolation();
+                valid &= false;
+            }
 
-        if (map.getRoutes() != null) {
+            if (map.getRoutes() != null) {
 
-            for (Route route : map.getRoutes()) {
-                valid &= validateRoute(route, context);
+                for (Route route : map.getRoutes()) {
+                    valid &= validateRoute(route, context);
+                }
             }
         }
 
@@ -54,21 +55,22 @@ public class MapValidation implements ConstraintValidator<MapConstraint, Map> {
         if (route == null) {
             context.buildConstraintViolationWithTemplate("A rota esta nula.").addConstraintViolation();
             valid &= false;
+        } else {
+
+            if (route.getOrigin() == null) {
+                context.buildConstraintViolationWithTemplate("A origem da rota nao foi definida.").addConstraintViolation();
+                valid &= false;
+            }
+
+            if (route.getDestiny() == null) {
+                context.buildConstraintViolationWithTemplate("O destino da rota nao foi definido.").addConstraintViolation();
+                valid &= false;
+            }
+
+            valid &= validatePoint(route.getOrigin(), context);
+
+            valid &= validatePoint(route.getDestiny(), context);
         }
-
-        if (route.getOrigin() == null) {
-            context.buildConstraintViolationWithTemplate("A origem da rota nao foi definida.").addConstraintViolation();
-            valid &= false;
-        }
-
-        if (route.getDestiny() == null) {
-            context.buildConstraintViolationWithTemplate("O destino da rota nao foi definido.").addConstraintViolation();
-            valid &= false;
-        }
-
-        valid &= validatePoint(route.getOrigin(), context);
-
-        valid &= validatePoint(route.getDestiny(), context);
 
         return valid;
     }
@@ -80,11 +82,12 @@ public class MapValidation implements ConstraintValidator<MapConstraint, Map> {
         if (point == null) {
             context.buildConstraintViolationWithTemplate("O ponto esta nulo.").addConstraintViolation();
             valid &= false;
-        }
+        } else {
 
-        if (point.getName() == null || point.getName().trim().isEmpty()) {
-            context.buildConstraintViolationWithTemplate("O nome do ponto esta nulo.").addConstraintViolation();
-            valid &= false;
+            if (point.getName() == null || point.getName().trim().isEmpty()) {
+                context.buildConstraintViolationWithTemplate("O nome do ponto esta nulo.").addConstraintViolation();
+                valid &= false;
+            }
         }
 
         return valid;

@@ -5,7 +5,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,22 +48,6 @@ public class MapController {
         application.persist(map);
 
         return new ResponseEntity(HttpStatus.CREATED);
-    }
-
-    /**
-     * Endpoint utilizado para visualizar a malha logistica.
-     *
-     * EX. de Chamada: GET http://127.0.0.1/logistics/map/meumapa
-     *
-     * @return Codigo 200 (OK) e o conteudo da malha em formato JSON.
-     *         Codigo 500 (Internal server error) se houverem erros na execucao.
-     */
-    @RequestMapping(value = "/{map}", method = RequestMethod.GET)
-    public ResponseEntity<Map> get(@PathVariable("map") String name) {
-
-        Map map = application.findByName(name);
-
-        return new ResponseEntity<Map>(map, HttpStatus.OK);
     }
 
     /**

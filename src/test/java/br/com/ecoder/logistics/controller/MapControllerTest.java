@@ -50,7 +50,6 @@ public class MapControllerTest {
 
         map.getRoutes().add(route);
 
-        when(application.findByName(anyString())).thenReturn(map);
         when(application.findRoute(anyString(), anyString(), anyString(), anyFloat(), anyFloat())).thenReturn(map);
 
         controller = new MapController();
@@ -65,27 +64,6 @@ public class MapControllerTest {
         controller.save(map);
 
         Mockito.verify(application, Mockito.times(1)).persist(map);
-    }
-
-    @Test
-    public void should_call_find() {
-
-        ResponseEntity<Map> response = controller.get("test");
-
-        Mockito.verify(application, Mockito.times(1)).findByName("test");
-        Assert.assertNotNull(response);
-        Assert.assertNotNull(response.getBody());
-        Assert.assertNotNull(response.getBody().getName());
-        Assert.assertEquals(map, response.getBody());
-
-        Assert.assertEquals("test", response.getBody().getName());
-        Assert.assertEquals(new Float(10.0f), response.getBody().getAutonomy());
-        Assert.assertEquals(new Float(2.5f), response.getBody().getGasCost());
-        Assert.assertEquals(new Float(6.25f), response.getBody().getTotalCost());
-
-        Assert.assertEquals(new Integer(1), response.getBody().getRoutes().get(0).getDistance());
-        Assert.assertEquals("A", response.getBody().getRoutes().get(0).getOrigin().getName());
-        Assert.assertEquals("B", response.getBody().getRoutes().get(0).getDestiny().getName());
     }
 
     @Test

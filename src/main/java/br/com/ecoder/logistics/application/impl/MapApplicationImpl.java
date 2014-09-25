@@ -26,14 +26,14 @@ public class MapApplicationImpl implements MapApplication {
 
             String origin = route.getOrigin().getName();
             String destiny = route.getDestiny().getName();
-            Float distance = route.getDistance().floatValue();
+            Double distance = route.getDistance().doubleValue();
 
             dao.createRelationship(name, origin, destiny, distance);
         }
     }
 
     @Override
-    public Map findRoute(String name, String origin, String destiny, Float autonomy, Float cost) {
+    public Map findRoute(String name, String origin, String destiny, Double autonomy, Double cost) {
 
         List<Route> routes = dao.findRoute(name, origin, destiny);
 
@@ -48,9 +48,9 @@ public class MapApplicationImpl implements MapApplication {
         return map;
     }
 
-    private Float getTotalCost(List<Route> routes, Float autonomy, Float cost) {
+    private Double getTotalCost(List<Route> routes, Double autonomy, Double cost) {
 
-        Float distance = 0f;
+        Double distance = 0.0;
 
         for (Route route : routes) {
             distance += route.getDistance();

@@ -45,7 +45,7 @@ public class MapValidationTest {
         Route route = new Route();
         route.setOrigin(new Point());
         route.setDestiny(new Point());
-        route.setDistance(1);
+        route.setDistance(1.0);
         route.getOrigin().setName("A");
         route.getDestiny().setName("B");
 
@@ -155,7 +155,7 @@ public class MapValidationTest {
         map.getRoutes().add(new Route());
         map.getRoutes().get(0).setOrigin(null);
         map.getRoutes().get(0).setDestiny(new Point());
-        map.getRoutes().get(0).setDistance(1);
+        map.getRoutes().get(0).setDistance(1.0);
 
         MapValidation validation = new MapValidation();
 
@@ -174,7 +174,7 @@ public class MapValidationTest {
         map.getRoutes().add(new Route());
         map.getRoutes().get(0).setOrigin(new Point());
         map.getRoutes().get(0).setDestiny(null);
-        map.getRoutes().get(0).setDistance(1);
+        map.getRoutes().get(0).setDistance(1.0);
 
         MapValidation validation = new MapValidation();
 
@@ -214,7 +214,7 @@ public class MapValidationTest {
         map.getRoutes().get(0).getOrigin().setName(null);
         map.getRoutes().get(0).setDestiny(new Point());
         map.getRoutes().get(0).getDestiny().setName("B");
-        map.getRoutes().get(0).setDistance(1);
+        map.getRoutes().get(0).setDistance(1.0);
 
         MapValidation validation = new MapValidation();
 
@@ -235,7 +235,7 @@ public class MapValidationTest {
         map.getRoutes().get(0).getOrigin().setName("");
         map.getRoutes().get(0).setDestiny(new Point());
         map.getRoutes().get(0).getDestiny().setName("B");
-        map.getRoutes().get(0).setDistance(1);
+        map.getRoutes().get(0).setDistance(1.0);
 
         MapValidation validation = new MapValidation();
 

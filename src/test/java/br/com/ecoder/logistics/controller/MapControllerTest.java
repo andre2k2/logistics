@@ -1,6 +1,6 @@
 package br.com.ecoder.logistics.controller;
 
-import static org.mockito.Matchers.anyFloat;
+import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -36,21 +36,21 @@ public class MapControllerTest {
 
         map = new Map();
         map.setName("test");
-        map.setAutonomy(10.0f);
-        map.setGasCost(2.5f);
-        map.setTotalCost(6.25f);
+        map.setAutonomy(10.0);
+        map.setGasCost(2.5);
+        map.setTotalCost(6.25);
         map.setRoutes(new LinkedList<Route>());
 
         Route route = new Route();
         route.setOrigin(new Point());
         route.setDestiny(new Point());
-        route.setDistance(1);
+        route.setDistance(1.0);
         route.getOrigin().setName("A");
         route.getDestiny().setName("B");
 
         map.getRoutes().add(route);
 
-        when(application.findRoute(anyString(), anyString(), anyString(), anyFloat(), anyFloat())).thenReturn(map);
+        when(application.findRoute(anyString(), anyString(), anyString(), anyDouble(), anyDouble())).thenReturn(map);
 
         controller = new MapController();
         Whitebox.setInternalState(controller, "application", application);
@@ -69,20 +69,20 @@ public class MapControllerTest {
     @Test
     public void should_call_route() {
 
-        ResponseEntity<Map> response = controller.route("test", "A", "B", 10.0f, 2.5f);
+        ResponseEntity<Map> response = controller.route("test", "A", "B", 10.0, 2.5);
 
-        Mockito.verify(application, Mockito.times(1)).findRoute("test", "A", "B", 10.0f, 2.5f);
+        Mockito.verify(application, Mockito.times(1)).findRoute("test", "A", "B", 10.0, 2.5);
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.getBody());
         Assert.assertNotNull(response.getBody().getName());
         Assert.assertEquals(map, response.getBody());
 
         Assert.assertEquals("test", response.getBody().getName());
-        Assert.assertEquals(new Float(10.0f), response.getBody().getAutonomy());
-        Assert.assertEquals(new Float(2.5f), response.getBody().getGasCost());
-        Assert.assertEquals(new Float(6.25f), response.getBody().getTotalCost());
+        Assert.assertEquals(new Double(10.0), response.getBody().getAutonomy());
+        Assert.assertEquals(new Double(2.5), response.getBody().getGasCost());
+        Assert.assertEquals(new Double(6.25), response.getBody().getTotalCost());
 
-        Assert.assertEquals(new Integer(1), response.getBody().getRoutes().get(0).getDistance());
+        Assert.assertEquals(new Double(1), response.getBody().getRoutes().get(0).getDistance());
         Assert.assertEquals("A", response.getBody().getRoutes().get(0).getOrigin().getName());
         Assert.assertEquals("B", response.getBody().getRoutes().get(0).getDestiny().getName());
     }

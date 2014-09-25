@@ -84,8 +84,8 @@ public class MapController {
             @RequestParam(value = "map", required = true) String name,
             @RequestParam(value = "origin", required = true) String origin,
             @RequestParam(value = "destiny", required = true) String destiny,
-            @RequestParam(value = "autonomy", required = true) Float autonomy,
-            @RequestParam(value = "cost", required = true) Float cost) {
+            @RequestParam(value = "autonomy", required = true) Double autonomy,
+            @RequestParam(value = "cost", required = true) Double cost) {
 
         Map map = application.findRoute(name, origin, destiny, autonomy, cost);
 

@@ -9,6 +9,12 @@ public class Point {
 
     private String name;
 
+    public Point() {}
+
+    public Point(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

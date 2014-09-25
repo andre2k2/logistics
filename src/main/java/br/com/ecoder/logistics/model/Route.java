@@ -9,7 +9,7 @@ public class Route {
 
     private Point origin;
     private Point destiny;
-    private Integer distance;
+    private Double distance;
 
     public Point getOrigin() {
         return origin;
@@ -27,11 +27,11 @@ public class Route {
         this.destiny = destiny;
     }
 
-    public Integer getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public void setDistance(Integer distance) {
+    public void setDistance(Double distance) {
         this.distance = distance;
     }
 

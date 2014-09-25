@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import br.com.ecoder.logistics.dao.MapDAO;
+import br.com.ecoder.logistics.model.Point;
 import br.com.ecoder.logistics.model.Route;
 
 @Service
@@ -55,7 +56,7 @@ public class MapNeo4jDAO implements MapDAO {
     }
 
     @Override
-    public void createRelationship(String map, String origin, String destiny, Float distance) {
+    public void createRelationship(String map, String origin, String destiny, Double distance) {
 
         MapRepository repository = getMapRepository(map);
         Transaction tx = repository.graphDb.beginTx();
@@ -104,12 +105,30 @@ public class MapNeo4jDAO implements MapDAO {
         Node end = getNode(repository, destiny);
         WeightedPath path = pathFinder.findSinglePath(start, end);
 
-        for (Node node : path.nodes()) {
-            System.out.println(node.getProperty(NAME));
-            System.out.println(node.getSingleRelationship(MapRelationType.PATH, Direction.BOTH));
+        for (Relationship relationship : path.relationships()) {
+
+            Node originNode = relationship.getStartNode();
+            Node destinyNode = relationship.getEndNode();
+
+            String originName = originNode.getProperty(NAME).toString();
+            String destinyName = destinyNode.getProperty(NAME).toString();
+            Double distance = (Double) relationship.getProperty(DISTANCE);
+
+            Route route = new Route();
+            route.setOrigin(new Point(originName));
+            route.setDestiny(new Point(destinyName));
+            route.setDistance(distance);
+
+            result.add(route);
         }
 
         return result;
     }
 
+    public void shutdown() {
+
+        for (MapRepository repository : repositories.values()) {
+            repository.index.shutdown();
+        }
+    }
 }

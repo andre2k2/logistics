@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class Map {
 
     private String name;
-    private Float autonomy;
-    private Float gasCost;
-    private Float totalCost;
+    private Double autonomy;
+    private Double gasCost;
+    private Double totalCost;
     private List<Route> routes;
 
     public String getName() {
@@ -26,27 +26,27 @@ public class Map {
         this.name = name;
     }
 
-    public Float getAutonomy() {
+    public Double getAutonomy() {
         return autonomy;
     }
 
-    public void setAutonomy(Float autonomy) {
+    public void setAutonomy(Double autonomy) {
         this.autonomy = autonomy;
     }
 
-    public Float getGasCost() {
+    public Double getGasCost() {
         return gasCost;
     }
 
-    public void setGasCost(Float gasCost) {
+    public void setGasCost(Double gasCost) {
         this.gasCost = gasCost;
     }
 
-    public Float getTotalCost() {
+    public Double getTotalCost() {
         return totalCost;
     }
 
-    public void setTotalCost(Float totalCost) {
+    public void setTotalCost(Double totalCost) {
         this.totalCost = totalCost;
     }
 

@@ -55,6 +55,9 @@ public class MapNeo4jDAO implements MapDAO {
         return repository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void createRelationship(String map, String origin, String destiny, Double distance) {
 
@@ -95,6 +98,9 @@ public class MapNeo4jDAO implements MapDAO {
         return repository.index.getSingleNode(NAME, name);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Route> findRoute(String map, String origin, String destiny) {
 
@@ -103,28 +109,39 @@ public class MapNeo4jDAO implements MapDAO {
 
         Node start = getNode(repository, origin);
         Node end = getNode(repository, destiny);
+
+        // executa a busca pelo menor caminho
         WeightedPath path = pathFinder.findSinglePath(start, end);
 
         for (Relationship relationship : path.relationships()) {
 
-            Node originNode = relationship.getStartNode();
-            Node destinyNode = relationship.getEndNode();
-
-            String originName = originNode.getProperty(NAME).toString();
-            String destinyName = destinyNode.getProperty(NAME).toString();
-            Double distance = (Double) relationship.getProperty(DISTANCE);
-
-            Route route = new Route();
-            route.setOrigin(new Point(originName));
-            route.setDestiny(new Point(destinyName));
-            route.setDistance(distance);
-
+            Route route = createRoute(relationship);
             result.add(route);
         }
 
         return result;
     }
 
+    private Route createRoute(Relationship relationship) {
+
+        Node originNode = relationship.getStartNode();
+        Node destinyNode = relationship.getEndNode();
+
+        String originName = originNode.getProperty(NAME).toString();
+        String destinyName = destinyNode.getProperty(NAME).toString();
+        Double distance = (Double) relationship.getProperty(DISTANCE);
+
+        Route route = new Route();
+        route.setOrigin(new Point(originName));
+        route.setDestiny(new Point(destinyName));
+        route.setDistance(distance);
+
+        return route;
+    }
+
+    /**
+     * Metodo utilizado para liberar os recuros e executar flush nos arquivos.
+     */
     public void shutdown() {
 
         for (MapRepository repository : repositories.values()) {

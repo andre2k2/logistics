@@ -34,12 +34,15 @@ public class MapController {
      *         {
      *         "origin": { "name": "A" },
      *         "destiny": { "name": "B" },
-     *         "distance": 10
+     *         "distance": 10.0
      *         }
      *     ]
      * }
      *
      * @return Codigo 201 (Created) se a malha logistica foi criada com sucesso.
+     *         Codigo 400 (Bad Request) se houver erros de validacao. Um objeto JSON
+     *                    com uma lista de erros será retornanda.
+     *                    Ex.: { "errors": [ {"message": "O nome do mapa esta nulo."} ] }
      *         Codigo 500 (Internal server error) se houve algum problema na criacao.
      */
     @RequestMapping(method = RequestMethod.POST)
@@ -47,7 +50,7 @@ public class MapController {
 
         application.persist(map);
 
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -65,19 +68,23 @@ public class MapController {
      *         {
      *         "origin": { "name": "A" },
      *         "destiny": { "name": "B" },
-     *         "distance": 100
+     *         "distance": 100.0
      *         }
      *     ]
      * }
      *
+     * name: nome da malha logistica.
+     * autonomy: autonomia do caminhao (Km/Litro).
+     * gasCost: custo do combustivel.
+     * totalCost: custo total de combustivel que sera gasto na rota definida.
+     * route: menor rota na malha logistica entre os dois pontos.
+     *
      * @return Codigo 200 (OK) e o conteudo da malha em formato JSON.
+     *         Codigo 400 (Bad Request) se houver erros de validacao. Um objeto JSON
+     *                    com uma lista de erros será retornanda.
+     *                    Ex.: { "errors": [ {"message": "O nome do mapa esta nulo."} ] }
      *         Codigo 500 (Internal server error) se houverem erros na execucao.
      *
-     *         name: nome da malha logistica.
-     *         autonomy: autonomia do caminhao (Km/Litro).
-     *         gasCost: custo do combustivel.
-     *         totalCost: custo total de combustivel que sera gasto na rota definida.
-     *         route: menor rota na malha logistica entre os dois pontos.
      */
     @RequestMapping(value = "/route", method = RequestMethod.GET)
     public ResponseEntity<Map> route(

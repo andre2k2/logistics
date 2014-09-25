@@ -16,6 +16,9 @@ public class MapApplicationImpl implements MapApplication {
     @Autowired
     private MapDAO dao;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void persist(Map map) {
 
@@ -32,6 +35,9 @@ public class MapApplicationImpl implements MapApplication {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map findRoute(String name, String origin, String destiny, Double autonomy, Double cost) {
 

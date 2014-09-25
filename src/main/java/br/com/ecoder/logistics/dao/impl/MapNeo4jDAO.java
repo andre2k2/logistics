@@ -110,13 +110,19 @@ public class MapNeo4jDAO implements MapDAO {
         Node start = getNode(repository, origin);
         Node end = getNode(repository, destiny);
 
-        // executa a busca pelo menor caminho
-        WeightedPath path = pathFinder.findSinglePath(start, end);
+        if (start != null && end != null) {
 
-        for (Relationship relationship : path.relationships()) {
+            // executa a busca pelo menor caminho
+            WeightedPath path = pathFinder.findSinglePath(start, end);
 
-            Route route = createRoute(relationship);
-            result.add(route);
+            if (path != null) {
+
+                for (Relationship relationship : path.relationships()) {
+
+                    Route route = createRoute(relationship);
+                    result.add(route);
+                }
+            }
         }
 
         return result;

@@ -25,7 +25,7 @@ public class MapController {
     /**
      * Endpoint utilizado para persistir uma malha logistica.
      *
-     * Ex. de Chamada: POST http://127.0.0.1/logistics/map
+     * Ex. de Chamada: POST http://127.0.0.1:8080/logistics/map
      *
      * Body Content:
      * {
@@ -56,7 +56,7 @@ public class MapController {
     /**
      * Endpoit utilizado para calcular a menor rota e menor custo entre dois pontos de uma malha logistica.
      *
-     * Ex. de Chamada: GET http://127.0.0.1/logistics/map/route?map=teste&origin=A&destiny=D&autonomy=10.0&cost=2.5
+     * Ex. de Chamada: GET http://127.0.0.1:8080/logistics/map/route?map=teste&origin=A&destiny=D&autonomy=10.0&cost=2.5
      *
      * Ex. de Retorno:
      * {

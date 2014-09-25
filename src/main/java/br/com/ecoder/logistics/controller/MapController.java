@@ -32,10 +32,11 @@ public class MapController {
      *     "name": "teste",
      *     "routes": [
      *         {
-     *         "origin": { "name": "A" },
-     *         "destiny": { "name": "B" },
-     *         "distance": 10.0
-     *         }
+     *             "origin": { "name": "A" },
+     *             "destiny": { "name": "B" },
+     *             "distance": 10.0
+     *         },
+     *         ...
      *     ]
      * }
      *
@@ -63,13 +64,14 @@ public class MapController {
      *     "name": "teste",
      *     "autonomy": 10.0,
      *     "gasCost": 2.5,
-     *     "totalCost": 25.0,
+     *     "totalCost": 6.25,
      *     "routes": [
      *         {
-     *         "origin": { "name": "A" },
-     *         "destiny": { "name": "B" },
-     *         "distance": 100.0
-     *         }
+     *             "origin": { "name": "A" },
+     *             "destiny": { "name": "B" },
+     *             "distance": 10.0
+     *         },
+     *         ...
      *     ]
      * }
      *
